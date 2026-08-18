@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdvisorHood – Intelligent Position Management</title>
+  <meta name="description" content="AdvisorHood helps you stay consistent and free with intelligent, semi-automatic position management. Freedom. Discipline. Precision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0b1c2d;
+      --navy-2: #12263a;
+      --accent: #3b82f6;
+      --accent-soft: #60a5fa;
+      --gold: #f59e0b;
+      --teal: #14b8a6;
+      --gray: #64748b;
+      --gray-light: #94a3b8;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 4px 24px -4px rgba(11, 28, 45, 0.08);
+      --shadow-lg: 0 20px 40px -12px rgba(11, 28, 45, 0.12);
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--navy);
+      line-height: 1.6;
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(226,232,240,0.8);
+      z-index: 100;
+      padding: 0.85rem 0;
+    }
+    .container {
+      width: min(1140px, 92%);
+      margin: 0 auto;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--gray);
+    }
+    .nav-links a { transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+
+    /* Language switcher */
+    .lang-switch {
+      display: flex;
+      background: #f1f5f9;
+      border-radius: 999px;
+      padding: 3px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .lang-btn {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--gray);
+      font-family: inherit;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: white;
+      color: var(--navy);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.35rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: -0.01em;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 2px 8px rgba(11,28,45,0.15);
+    }
+    .btn-primary:hover {
+      background: var(--navy-2);
+      transform: translateY(-1px);
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-accent:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: white;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.7);
+    }
+
+    /* Mobile menu button */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--navy);
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: 0.2s;
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 64px;
+      position: relative;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(145deg, #0b1c2d 0%, #12263a 50%, #0f2744 100%);
+      color: white;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('hero.jpg') center/cover no-repeat;
+      opacity: 0.35;
+      mix-blend-mode: luminosity;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(59,130,246,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+      padding: 4.5rem 0 4rem;
+    }
+    .hero-badge {
+      display: inline-flex;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1.3rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      margin-bottom: 2rem;
+      max-width: 520px;
+      line-height: 1.65;
+    }
+    .hero-cta { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+
+    /* Sections */
+    section { padding: 5rem 0; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-title h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.65rem;
+    }
+    .section-title p {
+      color: var(--gray);
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 1.02rem;
+    }
+
+    /* Benefits */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .benefit-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.6rem 1.8rem 2.4rem;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--teal));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .benefit-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .benefit-card:hover::before { opacity: 1; }
+    .benefit-card img {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 1.5rem;
+      object-fit: contain;
+    }
+    .benefit-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+    .benefit-card p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Results */
+    .results { background: var(--bg); }
+    .results-inner {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .chart-box {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .chart-box img { border-radius: 10px; }
+    .results-text h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .results-text p {
+      color: var(--gray);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .disclaimer {
+      font-size: 0.8rem;
+      color: var(--gray-light);
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      margin-top: 1.5rem;
+      line-height: 1.55;
+    }
+
+    /* Pricing */
+    .pricing-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 0.3rem;
+      margin-bottom: 2.6rem;
+      background: #f1f5f9;
+      padding: 0.3rem;
+      border-radius: 999px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .toggle-btn {
+      padding: 0.55rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--gray);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .toggle-btn.active {
+      background: white;
+      color: var(--navy);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .price-card {
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem 2.1rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--teal));
+    }
+    .plan-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .price {
+      font-size: 3.1rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin: 0.5rem 0 0.35rem;
+    }
+    .price span {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0;
+    }
+    .price-note {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 1.7rem;
+    }
+    .features {
+      text-align: left;
+      margin: 0 0 1.9rem;
+      list-style: none;
+    }
+    .features li {
+      padding: 0.48rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.95rem;
+      color: var(--navy-2);
+    }
+    .features li::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      background: #dcfce7;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2316a34a'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+      background-size: 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text h2 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.1rem;
+    }
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 1rem;
+      font-size: 1.02rem;
+    }
+    .b2b-box {
+      background: linear-gradient(160deg, var(--navy) 0%, #152a42 100%);
+      color: white;
+      border-radius: var(--radius);
+      padding: 2.1rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .b2b-box h3 {
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .b2b-box ul { list-style: none; }
+    .b2b-box li {
+      padding: 0.42rem 0;
+      opacity: 0.9;
+      font-size: 0.94rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .b2b-box li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent-soft);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .b2b-box p {
+      margin-top: 1.2rem;
+      font-size: 0.87rem;
+      opacity: 0.75;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--navy);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.8rem;
+    }
+    .footer-logo {
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.8rem;
+    }
+    .footer-logo span { color: var(--accent-soft); }
+    .footer-desc {
+      opacity: 0.7;
+      font-size: 0.93rem;
+      max-width: 280px;
+      line-height: 1.55;
+    }
+    .footer-links strong {
+      display: block;
+      margin-bottom: 0.85rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+    .footer-links a {
+      display: block;
+      opacity: 0.65;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 1; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+      font-size: 0.78rem;
+      opacity: 0.55;
+      text-align: center;
+    }
+    .legal-disclaimer {
+      max-width: 820px;
+      margin: 1.3rem auto 0;
+      font-size: 0.73rem;
+      line-height: 1.55;
+      opacity: 0.6;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 28, 45, 0.65);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 1rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 20px;
+      width: min(440px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 2rem 1.85rem;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .modal .sub {
+      color: var(--gray);
+      font-size: 0.88rem;
+      margin-bottom: 1.2rem;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1.05rem; right: 1.15rem;
+      background: #f1f5f9;
+      border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .close-btn:hover { background: #e2e8f0; }
+
+    .selected-plan {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #bae6fd;
+      border-radius: 12px;
+      padding: 0.85rem 1.05rem;
+      margin-bottom: 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .selected-plan .label {
+      font-size: 0.78rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+    .selected-plan .value {
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: var(--navy);
+    }
+    .selected-plan .price-tag {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: white;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--navy-2);
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"] {
+      width: 100%;
+      padding: 0.72rem 0.95rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fafbfc;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+      background: white;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      font-size: 0.84rem;
+      margin-bottom: 0.7rem;
+      color: var(--gray);
+    }
+    .checkbox-group input {
+      margin-top: 0.2rem;
+      accent-color: var(--accent);
+    }
+    .form-actions { margin-top: 1.3rem; }
+    .form-actions .btn { width: 100%; padding: 0.82rem; border-radius: 12px; }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 1rem 0 0.4rem;
+    }
+    .success-msg .icon {
+      width: 54px;
+      height: 54px;
+      background: #dcfce7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.1rem;
+      font-size: 1.5rem;
+    }
+    .success-msg h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+    .success-msg p {
+      color: var(--gray);
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
+
+    /* ========== Mobile Responsive ========== */
+    @media (max-width: 900px) {
+      .benefits-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .results-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: block; }
+      .nav-right .btn-primary { display: none; }
+
+      .hero { min-height: auto; }
+      .hero-content { padding: 3.5rem 0 3rem; }
+      .hero h1 { font-size: 1.95rem; }
+      .hero p { font-size: 1.02rem; }
+
+      section { padding: 3.8rem 0; }
+      .section-title { margin-bottom: 2.2rem; }
+
+      .price { font-size: 2.7rem; }
+      .modal { padding: 1.7rem 1.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .lang-switch { font-size: 0.75rem; }
+      .lang-btn { padding: 0.28rem 0.55rem; }
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn { width: 100%; }
+    }
+
+    /* Mobile nav drawer */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0; right: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.2rem 1.4rem;
+      z-index: 99;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .mobile-nav.active { display: block; }
+    .mobile-nav a {
+      display: block;
+      padding: 0.75rem 0;
+      font-weight: 500;
+      color: var(--navy);
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .mobile-nav .btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">Advisor<span>Hood</span></a>
+
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#benefits" data-i18n="nav_benefits">Benefits</a>
+          <a href="#results" data-i18n="nav_results">Results</a>
+          <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+          <a href="#about" data-i18n="nav_about">About</a>
+        </nav>
+
+        <div class="lang-switch">
+          <button class="lang-btn active" id="langEN" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="langID" onclick="setLang('id')">ID</button>
+        </div>
+
+        <button class="btn btn-primary" onclick="openModal()" data-i18n="btn_get_started">Get Started</button>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#benefits" onclick="closeMobile()" data-i18n="nav_benefits">Benefits</a>
+    <a href="#results" onclick="closeMobile()" data-i18n="nav_results">Results</a>
+    <a href="#pricing" onclick="closeMobile()" data-i18n="nav_pricing">Pricing</a>
+    <a href="#about" onclick="closeMobile()" data-i18n="nav_about">About</a>
+    <button class="btn btn-primary" onclick="openModal(); closeMobile();" data-i18n="btn_get_started">Get Started</button>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge" data-i18n="hero_badge">Intelligent Position Management</div>
+        <h1 data-i18n="hero_title">Stay consistent and free while your positions are managed with discipline</h1>
+        <p data-i18n="hero_desc">AdvisorHood continuously monitors and adjusts according to clear rules — giving you Freedom, Discipline and Precision without requiring constant attention.</p>
+        <div class="hero-cta">
+          <button class="btn btn-accent" onclick="openModal()" data-i18n="btn_start">Start Now</button>
+          <a href="#benefits" class="btn btn-outline" data-i18n="btn_see_benefits">See Benefits</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefits">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="benefits_title">Why AdvisorHood</h2>
+        <p data-i18n="benefits_sub">Three clear reasons your salesperson can say in one breath.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <img src="icon-freedom.jpg" alt="Freedom" />
+          <h3 data-i18n="b1_title">Freedom</h3>
+          <p data-i18n="b1_desc">Continuous monitoring and intelligent adjustments happen while you focus on other priorities. No constant screen time required.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="icon-discipline.jpg" alt="Discipline" />
+          <h3 data-i18n="b2_title">Discipline</h3>
+          <p data-i18n="b2_desc">Rule-based, emotion-free handling of levels. Consistent application of your plan without hesitation or second-guessing.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="icon-precision.jpg" alt="Precision" />
+          <h3 data-i18n="b3_title">Precision</h3>
+          <p data-i18n="b3_desc">Timely and accurate adjustments to protective levels and targets, helping protect capital and lock in outcomes systematically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="results">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="results_title">Technology in Action</h2>
+        <p data-i18n="results_sub">Illustrative historical character of results from our algorithm.</p>
+      </div>
+      <div class="results-inner">
+        <div class="chart-box">
+          <img src="chart.jpg" alt="Historical equity curve illustration" />
+        </div>
+        <div class="results-text">
+          <h3 data-i18n="results_h3">Consistent application of intelligent rules</h3>
+          <p data-i18n="results_p1">Our technology has been applied in real environments and rigorous testing. The illustration shows the character of results achieved through disciplined, rule-based position management.</p>
+          <p data-i18n="results_p2">We deliberately avoid highlighting specific headline numbers because past results do not guarantee future outcomes. What matters is the underlying consistency and risk-aware approach.</p>
+          <div class="disclaimer" data-i18n="results_disclaimer">
+            Past performance is not indicative of future results. This illustration is for informational purposes only and does not constitute financial advice. All activity involves risk of loss.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="pricing_title">Simple, Transparent Pricing</h2>
+        <p data-i18n="pricing_sub">One clear plan. Choose monthly or annual.</p>
+      </div>
+
+      <div class="pricing-toggle">
+        <button class="toggle-btn active" id="btnMonthly" onclick="setBilling('monthly')" data-i18n="toggle_monthly">Monthly</button>
+        <button class="toggle-btn" id="btnAnnual" onclick="setBilling('annual')"><span data-i18n="toggle_annual">Annual</span> <span style="font-size:0.8em;opacity:0.75" data-i18n="toggle_save">(Save ~16%)</span></button>
+      </div>
+
+      <div class="price-card">
+        <div class="plan-name" data-i18n="plan_name">AdvisorHood Standard</div>
+        <div class="price" id="priceDisplay">$69 <span data-i18n="per_month">/ month</span></div>
+        <div class="price-note" id="priceNote" data-i18n="price_note_monthly">Billed monthly. Cancel anytime.</div>
+        <ul class="features">
+          <li data-i18n="feat1">Full access to the AdvisorHood solution</li>
+          <li data-i18n="feat2">Continuous position monitoring &amp; adjustments</li>
+          <li data-i18n="feat3">Rule-based discipline &amp; precision</li>
+          <li data-i18n="feat4">Email support</li>
+          <li data-i18n="feat5">Regular technology updates</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;border-radius:12px;padding:0.9rem" onclick="openModal()" data-i18n="btn_purchase">Purchase</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 data-i18n="about_title">About AdvisorHood</h2>
+          <p data-i18n="about_p1">We are a technologist team focused on practical automation and intelligent decision-support tools. Our mission is to give users greater freedom, discipline and precision in managing positions without requiring constant attention.</p>
+          <p data-i18n="about_p2">AdvisorHood is our retail solution — a semi-automatic system designed to monitor and adjust according to clear rules while the user retains final control over outcomes.</p>
+          <p data-i18n="about_p3">Beyond the retail product, we also partner with brokerages and financial firms on technology needs.</p>
+        </div>
+        <div class="b2b-box">
+          <h3 data-i18n="b2b_title">For Brokerages &amp; Institutions</h3>
+          <ul>
+            <li data-i18n="b2b1">System customisation &amp; integration</li>
+            <li data-i18n="b2b2">Reporting &amp; interactive dashboards</li>
+            <li data-i18n="b2b3">Business process support</li>
+            <li data-i18n="b2b4">Technology outsourcing</li>
+            <li data-i18n="b2b5">Custom automation solutions</li>
+          </ul>
+          <p data-i18n="b2b_note">We build reliable tools for both individual users and professional organisations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Advisor<span>Hood</span></div>
+          <p class="footer-desc" data-i18n="footer_desc">Intelligent position management that gives you Freedom, Discipline and Precision.</p>
+        </div>
+        <div class="footer-links">
+          <strong data-i18n="footer_contact">Contact</strong>
+          <a href="mailto:hello@advisorhood.com">hello@advisorhood.com</a>
+          <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+          <a href="#about" data-i18n="nav_about">About Us</a>
+        </div>
+        <div class="footer-links">
+          <strong data-i18n="footer_legal">Legal</strong>
+          <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+          <a href="#" data-i18n="footer_terms">Terms &amp; Conditions</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 AdvisorHood. All rights reserved.</p>
+        <div class="legal-disclaimer" data-i18n="footer_disclaimer">
+          This website and the technology described are for informational purposes only. Nothing on this site constitutes financial, investment or trading advice. Past performance is not indicative of future results. The use of automated or semi-automated tools involves substantial risk of loss and may not be suitable for everyone. Please consider your own situation carefully and seek independent advice if needed.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Purchase Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      
+      <div id="formView">
+        <h3 data-i18n="modal_title">Complete Your Request</h3>
+        <p class="sub" data-i18n="modal_sub">Fill in your details. Our specialist will contact you shortly.</p>
+
+        <div class="selected-plan">
+          <div>
+            <div class="label" data-i18n="modal_selected">Selected plan</div>
+            <div class="value" id="modalPlanName">Monthly</div>
+          </div>
+          <div class="price-tag" id="modalPlanPrice">$69 / month</div>
+        </div>
+        
+        <form id="leadForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="fullName" data-i18n="label_name">Full Name *</label>
+            <input type="text" id="fullName" name="fullName" required placeholder="Your full name" data-i18n-placeholder="ph_name" />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="label_email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" data-i18n-placeholder="ph_email" />
+          </div>
+          <div class="form-group">
+            <label for="mobile" data-i18n="label_mobile">Mobile Number *</label>
+            <input type="tel" id="mobile" name="mobile" required placeholder="+62 812 3456 7890" data-i18n-placeholder="ph_mobile" />
+          </div>
+          
+          <div class="checkbox-group">
+            <input type="checkbox" id="marketing" name="marketing" />
+            <label for="marketing" data-i18n="check_marketing">I agree to receive marketing communications from AdvisorHood.</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" name="terms" required />
+            <label for="terms"><span data-i18n="check_terms1">I have read and agree to the</span> <a href="#" style="color:var(--accent)" data-i18n="footer_terms">Terms &amp; Conditions</a> <span data-i18n="check_terms2">and</span> <a href="#" style="color:var(--accent)" data-i18n="footer_privacy">Privacy Policy</a>. *</label>
+          </div>
+
+          <input type="text" name="website" id="website" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn" data-i18n="btn_proceed">Proceed to Payment</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="success-msg" id="successView">
+        <div class="icon">✓</div>
+        <h4 data-i18n="success_title">Thank you</h4>
+        <p data-i18n="success_p1">We apologise — we are currently experiencing technical difficulties with the payment system.</p>
+        <p style="margin-top:0.7rem" data-i18n="success_p2">Our sales specialist has received your details and will contact you shortly to complete the process and discuss the best arrangement for you.</p>
+        <button class="btn btn-primary" style="margin-top:1.5rem;width:100%;border-radius:12px" onclick="closeModal()" data-i18n="btn_close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========== Translations ==========
+    const i18n = {
+      en: {
+        nav_benefits: "Benefits",
+        nav_results: "Results",
+        nav_pricing: "Pricing",
+        nav_about: "About",
+        btn_get_started: "Get Started",
+        hero_badge: "Intelligent Position Management",
+        hero_title: "Stay consistent and free while your positions are managed with discipline",
+        hero_desc: "AdvisorHood continuously monitors and adjusts according to clear rules — giving you Freedom, Discipline and Precision without requiring constant attention.",
+        btn_start: "Start Now",
+        btn_see_benefits: "See Benefits",
+        benefits_title: "Why AdvisorHood",
+        benefits_sub: "Three clear reasons your salesperson can say in one breath.",
+        b1_title: "Freedom",
+        b1_desc: "Continuous monitoring and intelligent adjustments happen while you focus on other priorities. No constant screen time required.",
+        b2_title: "Discipline",
+        b2_desc: "Rule-based, emotion-free handling of levels. Consistent application of your plan without hesitation or second-guessing.",
+        b3_title: "Precision",
+        b3_desc: "Timely and accurate adjustments to protective levels and targets, helping protect capital and lock in outcomes systematically.",
+        results_title: "Technology in Action",
+        results_sub: "Illustrative historical character of results from our algorithm.",
+        results_h3: "Consistent application of intelligent rules",
+        results_p1: "Our technology has been applied in real environments and rigorous testing. The illustration shows the character of results achieved through disciplined, rule-based position management.",
+        results_p2: "We deliberately avoid highlighting specific headline numbers because past results do not guarantee future outcomes. What matters is the underlying consistency and risk-aware approach.",
+        results_disclaimer: "Past performance is not indicative of future results. This illustration is for informational purposes only and does not constitute financial advice. All activity involves risk of loss.",
+        pricing_title: "Simple, Transparent Pricing",
+        pricing_sub: "One clear plan. Choose monthly or annual.",
+        toggle_monthly: "Monthly",
+        toggle_annual: "Annual",
+        toggle_save: "(Save ~16%)",
+        plan_name: "AdvisorHood Standard",
+        per_month: "/ month",
+        per_year: "/ year",
+        price_note_monthly: "Billed monthly. Cancel anytime.",
+        price_note_annual: "Billed annually. Best value (save ~$129).",
+        feat1: "Full access to the AdvisorHood solution",
+        feat2: "Continuous position monitoring & adjustments",
+        feat3: "Rule-based discipline & precision",
+        feat4: "Email support",
+        feat5: "Regular technology updates",
+        btn_purchase: "Purchase",
+        about_title: "About AdvisorHood",
+        about_p1: "We are a technologist team focused on practical automation and intelligent decision-support tools. Our mission is to give users greater freedom, discipline and precision in managing positions without requiring constant attention.",
+        about_p2: "AdvisorHood is our retail solution — a semi-automatic system designed to monitor and adjust according to clear rules while the user retains final control over outcomes.",
+        about_p3: "Beyond the retail product, we also partner with brokerages and financial firms on technology needs.",
+        b2b_title: "For Brokerages & Institutions",
+        b2b1: "System customisation & integration",
+        b2b2: "Reporting & interactive dashboards",
+        b2b3: "Business process support",
+        b2b4: "Technology outsourcing",
+        b2b5: "Custom automation solutions",
+        b2b_note: "We build reliable tools for both individual users and professional organisations.",
+        footer_desc: "Intelligent position management that gives you Freedom, Discipline and Precision.",
+        footer_contact: "Contact",
+        footer_legal: "Legal",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms & Conditions",
+        footer_disclaimer: "This website and the technology described are for informational purposes only. Nothing on this site constitutes financial, investment or trading advice. Past performance is not indicative of future results. The use of automated or semi-automated tools involves substantial risk of loss and may not be suitable for everyone. Please consider your own situation carefully and seek independent advice if needed.",
+        modal_title: "Complete Your Request",
+        modal_sub: "Fill in your details. Our specialist will contact you shortly.",
+        modal_selected: "Selected plan",
+        label_name: "Full Name *",
+        label_email: "Email Address *",
+        label_mobile: "Mobile Number *",
+        ph_name: "Your full name",
+        ph_email: "you@example.com",
+        ph_mobile: "+62 812 3456 7890",
+        check_marketing: "I agree to receive marketing communications from AdvisorHood.",
+        check_terms1: "I have read and agree to the",
+        check_terms2: "and",
+        btn_proceed: "Proceed to Payment",
+        success_title: "Thank you",
+        success_p1: "We apologise — we are currently experiencing technical difficulties with the payment system.",
+        success_p2: "Our sales specialist has received your details and will contact you shortly to complete the process and discuss the best arrangement for you.",
+        btn_close: "Close",
+        plan_monthly: "Monthly",
+        plan_annual: "Annual"
+      },
+      id: {
+        nav_benefits: "Manfaat",
+        nav_results: "Hasil",
+        nav_pricing: "Harga",
+        nav_about: "Tentang",
+        btn_get_started: "Mulai",
+        hero_badge: "Manajemen Posisi Cerdas",
+        hero_title: "Tetap konsisten dan bebas sementara posisi Anda dikelola dengan disiplin",
+        hero_desc: "AdvisorHood terus memantau dan menyesuaikan sesuai aturan yang jelas — memberikan Anda Kebebasan, Disiplin, dan Presisi tanpa perlu perhatian terus-menerus.",
+        btn_start: "Mulai Sekarang",
+        btn_see_benefits: "Lihat Manfaat",
+        benefits_title: "Mengapa AdvisorHood",
+        benefits_sub: "Tiga alasan jelas yang bisa dikatakan sales Anda dalam satu napas.",
+        b1_title: "Kebebasan",
+        b1_desc: "Pemantauan terus-menerus dan penyesuaian cerdas terjadi sambil Anda fokus pada prioritas lain. Tidak perlu menatap layar terus-menerus.",
+        b2_title: "Disiplin",
+        b2_desc: "Penanganan level berbasis aturan tanpa emosi. Penerapan rencana yang konsisten tanpa keraguan atau second-guessing.",
+        b3_title: "Presisi",
+        b3_desc: "Penyesuaian level proteksi dan target yang tepat waktu dan akurat, membantu melindungi modal dan mengunci hasil secara sistematis.",
+        results_title: "Teknologi dalam Aksi",
+        results_sub: "Ilustrasi karakter hasil historis dari algoritma kami.",
+        results_h3: "Penerapan aturan cerdas yang konsisten",
+        results_p1: "Teknologi kami telah diterapkan di lingkungan nyata dan pengujian ketat. Ilustrasi ini menunjukkan karakter hasil yang dicapai melalui manajemen posisi berbasis aturan yang disiplin.",
+        results_p2: "Kami sengaja menghindari menampilkan angka headline spesifik karena hasil masa lalu tidak menjamin hasil di masa depan. Yang penting adalah konsistensi dan pendekatan yang sadar risiko.",
+        results_disclaimer: "Kinerja masa lalu tidak mencerminkan hasil di masa depan. Ilustrasi ini hanya untuk tujuan informasi dan bukan merupakan nasihat keuangan. Semua aktivitas melibatkan risiko kerugian.",
+        pricing_title: "Harga Sederhana & Transparan",
+        pricing_sub: "Satu paket jelas. Pilih bulanan atau tahunan.",
+        toggle_monthly: "Bulanan",
+        toggle_annual: "Tahunan",
+        toggle_save: "(Hemat ~16%)",
+        plan_name: "AdvisorHood Standard",
+        per_month: "/ bulan",
+        per_year: "/ tahun",
+        price_note_monthly: "Ditagih bulanan. Bisa dibatalkan kapan saja.",
+        price_note_annual: "Ditagih tahunan. Nilai terbaik (hemat ~$129).",
+        feat1: "Akses penuh ke solusi AdvisorHood",
+        feat2: "Pemantauan posisi & penyesuaian terus-menerus",
+        feat3: "Disiplin & presisi berbasis aturan",
+        feat4: "Dukungan email",
+        feat5: "Pembaruan teknologi rutin",
+        btn_purchase: "Beli",
+        about_title: "Tentang AdvisorHood",
+        about_p1: "Kami adalah tim teknolog yang fokus pada otomasi praktis dan alat pendukung keputusan cerdas. Misi kami adalah memberikan kebebasan, disiplin, dan presisi lebih besar dalam mengelola posisi tanpa perlu perhatian terus-menerus.",
+        about_p2: "AdvisorHood adalah solusi retail kami — sistem semi-otomatis yang dirancang untuk memantau dan menyesuaikan sesuai aturan jelas, sementara pengguna tetap memegang kontrol akhir atas hasil.",
+        about_p3: "Selain produk retail, kami juga bermitra dengan broker dan perusahaan keuangan untuk kebutuhan teknologi mereka.",
+        b2b_title: "Untuk Broker & Institusi",
+        b2b1: "Kustomisasi sistem & integrasi",
+        b2b2: "Pelaporan & dashboard interaktif",
+        b2b3: "Dukungan proses bisnis",
+        b2b4: "Outsourcing teknologi",
+        b2b5: "Solusi otomasi kustom",
+        b2b_note: "Kami membangun alat andal untuk pengguna individu maupun organisasi profesional.",
+        footer_desc: "Manajemen posisi cerdas yang memberikan Anda Kebebasan, Disiplin, dan Presisi.",
+        footer_contact: "Kontak",
+        footer_legal: "Legal",
+        footer_privacy: "Kebijakan Privasi",
+        footer_terms: "Syarat & Ketentuan",
+        footer_disclaimer: "Website dan teknologi yang dijelaskan hanya untuk tujuan informasi. Tidak ada yang di situs ini merupakan nasihat keuangan, investasi, atau trading. Kinerja masa lalu tidak mencerminkan hasil di masa depan. Penggunaan alat otomatis atau semi-otomatis melibatkan risiko kerugian yang substansial dan mungkin tidak cocok untuk semua orang. Harap pertimbangkan situasi Anda sendiri dengan cermat dan cari nasihat independen jika diperlukan.",
+        modal_title: "Lengkapi Permintaan Anda",
+        modal_sub: "Isi data Anda. Spesialis kami akan segera menghubungi Anda.",
+        modal_selected: "Paket dipilih",
+        label_name: "Nama Lengkap *",
+        label_email: "Alamat Email *",
+        label_mobile: "Nomor HP *",
+        ph_name: "Nama lengkap Anda",
+        ph_email: "anda@email.com",
+        ph_mobile: "+62 812 3456 7890",
+        check_marketing: "Saya setuju menerima komunikasi pemasaran dari AdvisorHood.",
+        check_terms1: "Saya telah membaca dan menyetujui",
+        check_terms2: "dan",
+        btn_proceed: "Lanjut ke Pembayaran",
+        success_title: "Terima kasih",
+        success_p1: "Kami mohon maaf — saat ini sedang mengalami kesulitan teknis pada sistem pembayaran.",
+        success_p2: "Spesialis penjualan kami telah menerima data Anda dan akan segera menghubungi untuk menyelesaikan proses serta mendiskusikan pengaturan terbaik untuk Anda.",
+        btn_close: "Tutup",
+        plan_monthly: "Bulanan",
+        plan_annual: "Tahunan"
+      }
+    };
+
+    let currentLang = 'en';
+    let currentBilling = 'monthly';
+
+    const prices = {
+      monthly: { en: { label: 'Monthly', price: '$69 / month' }, id: { label: 'Bulanan', price: '$69 / bulan' } },
+      annual:  { en: { label: 'Annual',  price: '$699 / year'  }, id: { label: 'Tahunan', price: '$699 / tahun' } }
+    };
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('langEN').classList.toggle('active', lang === 'en');
+      document.getElementById('langID').classList.toggle('active', lang === 'id');
+      document.documentElement.lang = lang;
+
+      // Update all data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) {
+          el.innerHTML = i18n[lang][key];
+        }
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (i18n[lang][key]) {
+          el.placeholder = i18n[lang][key];
+        }
+      });
+
+      // Refresh pricing text
+      setBilling(currentBilling);
+      updateModalPlan();
+    }
+
+    function setBilling(type) {
+      currentBilling = type;
+      const isMonthly = type === 'monthly';
+      const t = i18n[currentLang];
+
+      document.getElementById('priceDisplay').innerHTML = isMonthly
+        ? `$69 <span>${t.per_month}</span>`
+        : `$699 <span>${t.per_year}</span>`;
+      document.getElementById('priceNote').textContent = isMonthly ? t.price_note_monthly : t.price_note_annual;
+
+      document.getElementById('btnMonthly').classList.toggle('active', isMonthly);
+      document.getElementById('btnAnnual').classList.toggle('active', !isMonthly);
+
+      updateModalPlan();
+    }
+
+    function updateModalPlan() {
+      const p = prices[currentBilling][currentLang];
+      document.getElementById('modalPlanName').textContent = p.label;
+      document.getElementById('modalPlanPrice').textContent = p.price;
+    }
+
+    // Mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('active');
+    });
+    function closeMobile() {
+      mobileNav.classList.remove('active');
+    }
+
+    // Modal
+    function openModal() {
+      updateModalPlan();
+      document.getElementById('modal').classList.add('active');
+      document.getElementById('formView').style.display = 'block';
+      document.getElementById('successView').style.display = 'none';
+      document.getElementById('leadForm').reset();
+    }
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      if (document.getElementById('website').value) return;
+
+      const submitBtn = document.getElementById('submitBtn');
+      const t = i18n[currentLang];
+      submitBtn.disabled = true;
+      submitBtn.textContent = currentLang === 'id' ? 'Memproses...' : 'Processing...';
+
+      const data = {
+        fullName: document.getElementById('fullName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        mobile: document.getElementById('mobile').value.trim(),
+        marketing: document.getElementById('marketing').checked ? 'Yes' : 'No',
+        terms: document.getElementById('terms').checked ? 'Yes' : 'No',
+        plan: prices[currentBilling][currentLang].label,
+        price: prices[currentBilling][currentLang].price,
+        billing: currentBilling,
+        language: currentLang,
+        timestamp: new Date().toISOString()
+      };
+
+      const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+      try {
+        if (SCRIPT_URL && !SCRIPT_URL.includes('YOUR_GOOGLE')) {
+          await fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+        } else {
+          console.log('Lead captured (demo):', data);
+        }
+      } catch (err) {
+        console.log('Submission noted:', data);
+      }
+
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('successView').style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = t.btn_proceed;
+    }
+
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Init
+    setLang('en');
+  </script>
+</body>
+</html>
