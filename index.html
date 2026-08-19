@@ -1254,10 +1254,12 @@
         price: prices[currentBilling][currentLang].price,
         billing: currentBilling,
         language: currentLang,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        token: "AH2026xK9pQ7mL2vR",
+        origin: window.location.href
       };
 
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzAL5VXdvZ2zFzzpG9TTFJS7dXUmB5fQPAARyO-AoSBoKIsIYROWpAKGTBDblm6LpfZWA/exec';
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlPfU8pELPcmY3YAiP5ogtefIxj5aqeywW3KiA1Ah6_XPBxtnTYCu40ZTDpnq3a2IkGg/exec';
 
       try {
         if (SCRIPT_URL && !SCRIPT_URL.includes('YOUR_GOOGLE')) {
